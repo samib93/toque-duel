@@ -1,14 +1,25 @@
-import React from "react";
-import Navbar from "./navbar";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "../src/navbar";
+import Login from "../src/Login";
 
 function App() {
+  const [user, setUser] = useState(null);
+
   return (
-    <div>
-      <Navbar />
-      <main className="p-6">
-        <h1 className="text-3xl font-bold text-gray-800">Bienvenue sur Toque en Duel !</h1>
-      </main>
-    </div>
+    <Router>
+      {user ? (
+        <>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<h1>Bienvenue, {user.name} !</h1>} />
+            {/* Ajoute d'autres routes ici */}
+          </Routes>
+        </>
+      ) : (
+        <Login onLogin={setUser} /> // Passer la fonction onLogin
+      )}
+    </Router>
   );
 }
 

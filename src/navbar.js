@@ -2,7 +2,7 @@ import React from "react";
 import { HomeIcon, CalendarIcon, ChatBubbleOvalLeftEllipsisIcon, PlayIcon } from "@heroicons/react/24/outline";
 import logo from "../src/images/logo-duel.png";
 
-function Navbar() {
+function Navbar({ user }) {
   return (
     <nav className="bg-gray-800 text-white shadow-md">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
@@ -35,6 +35,18 @@ function Navbar() {
             <span>Media</span>
           </li>
         </ul>
+
+        {/* Affichage du logo de Google si l'utilisateur est connecté */}
+        {user && (
+          <div className="flex items-center space-x-4">
+            <img
+              src={user.picture} // L'URL de l'image de profil de l'utilisateur
+              alt="Google Profile"
+              className="h-10 w-10 rounded-full"
+            />
+            <span className="font-medium">{user.name}</span>
+          </div>
+        )}
       </div>
     </nav>
   );
