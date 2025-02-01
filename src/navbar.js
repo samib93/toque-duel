@@ -34,14 +34,11 @@ function Navbar({ user }) {
               <span>Calendrier</span>
             </Link>
           </li>
-
           <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
-            <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6" />
-            <span>Forum</span>
-          </li>
-          <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
+          <Link to="/media">
             <PlayIcon className="h-6 w-6" />
             <span>Media</span>
+            </Link>
           </li>
         </ul>
       </div>

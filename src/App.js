@@ -5,6 +5,7 @@ import Login from "./Login";
 import Presentation from "./Presentation"; 
 import Calendrier from "./calendrier"; // Ajout du composant Calendrier
 import RecetteIA from "../src/recette_ia";
+import Media from "../src/media";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -33,6 +34,8 @@ function App() {
 
             {/* Route pour la page Recette IA */}
             <Route path="/recette_ia" element={<RecetteIA />} />
+
+            <Route path="/media" element={<Media />} />
           </Routes>
         </>
       ) : (
