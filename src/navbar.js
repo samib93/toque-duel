@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Utilisation de Link pour la navigation
 import { HomeIcon, CalendarIcon, ChatBubbleOvalLeftEllipsisIcon, PlayIcon } from "@heroicons/react/24/outline";
 import logo from "../src/images/logo-duel.png";
 
@@ -7,6 +8,7 @@ function Navbar({ user }) {
     <nav className="bg-gray-800 text-white shadow-md">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         
+        {/* Logo aligné à gauche */}
         <div className="flex items-center">
           <img
             src={logo}
@@ -16,16 +18,23 @@ function Navbar({ user }) {
           <span className="ml-2 text-xl font-bold">Toque en Duel</span>
         </div>
 
-        {/* Menu */}
-        <ul className="flex space-x-6 items-center">
+        {/* Menu aligné à droite */}
+        <ul className="flex space-x-6 items-center ml-auto">
           <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
-            <HomeIcon className="h-6 w-6" />
-            <span>Recette IA</span>
+            <Link to="/recette_ia">
+              <HomeIcon className="h-6 w-6" />
+              <span>Recette IA</span>
+            </Link>
           </li>
+          
+          {/* Lien vers la page Calendrier */}
           <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
-            <CalendarIcon className="h-6 w-6" />
-            <span>Calendrier</span>
+            <Link to="/calendrier">
+              <CalendarIcon className="h-6 w-6" />
+              <span>Calendrier</span>
+            </Link>
           </li>
+
           <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
             <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6" />
             <span>Forum</span>
@@ -35,18 +44,6 @@ function Navbar({ user }) {
             <span>Media</span>
           </li>
         </ul>
-
-        {/* Affichage du logo de Google si l'utilisateur est connecté */}
-        {user && (
-          <div className="flex items-center space-x-4">
-            <img
-              src={user.picture} // L'URL de l'image de profil de l'utilisateur
-              alt="Google Profile"
-              className="h-10 w-10 rounded-full"
-            />
-            <span className="font-medium">{user.name}</span>
-          </div>
-        )}
       </div>
     </nav>
   );
