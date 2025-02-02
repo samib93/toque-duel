@@ -3,36 +3,57 @@ import { jwtDecode } from "jwt-decode";
 
 function Login({ onLogin }) {
   useEffect(() => {
-    // Vérifier que Google Sign-In est bien chargé
-    if (window.google) {
-      console.log("Google Sign-In script chargé !");
-      
-      const handleCredentialResponse = (response) => {
-        try {
-          const userObject = jwtDecode(response.credential); // Utilisation de jwtDecode
-          console.log("Utilisateur connecté :", userObject);
-          onLogin(userObject); // Appel de onLogin pour stocker l'utilisateur dans l'état
-        } catch (error) {
-          console.error("Erreur lors du décodage du JWT :", error);
-        }
-      };
-
-      /* Initialiser Google Sign-In */
-      window.google.accounts.id.initialize({
-        client_id: "524489779440-7qn934ehcobca35tsvr7acvpdaq998km.apps.googleusercontent.com", // Ton vrai ID client
-        callback: handleCredentialResponse,
-      });
-
-      /* Rendre le bouton Google Sign-In */
-      const googleSignInButton = document.getElementById("googleSignInButton");
-      if (googleSignInButton) {
-        window.google.accounts.id.renderButton(googleSignInButton, {
-          theme: "outline",
-          size: "large",
-        });
+    // Charger dynamiquement le script Google si nécessaire
+    const loadGoogleScript = () => {
+      if (!document.getElementById("google-script")) {
+        const script = document.createElement("script");
+        script.src = "https://accounts.google.com/gsi/client";
+        script.id = "google-script";
+        script.async = true;
+        script.defer = true;
+        script.onload = () => initializeGoogleSignIn(); // Initialise après chargement
+        document.body.appendChild(script);
+      } else {
+        initializeGoogleSignIn();
       }
+    };
+
+    // Fonction d'initialisation de Google Sign-In
+    const initializeGoogleSignIn = () => {
+      if (window.google && window.google.accounts) {
+        console.log("✅ Google Sign-In script chargé !");
+        
+        window.google.accounts.id.initialize({
+          client_id: "524489779440-7qn934ehcobca35tsvr7acvpdaq998km.apps.googleusercontent.com", // Ton vrai ID client
+          callback: (response) => {
+            try {
+              const userObject = jwtDecode(response.credential);
+              console.log("✅ Utilisateur connecté :", userObject);
+              onLogin(userObject);
+            } catch (error) {
+              console.error("❌ Erreur JWT :", error);
+            }
+          },
+        });
+
+        // Rendre le bouton Google Sign-In
+        const googleSignInButton = document.getElementById("googleSignInButton");
+        if (googleSignInButton) {
+          window.google.accounts.id.renderButton(googleSignInButton, {
+            theme: "outline",
+            size: "large",
+          });
+        }
+      } else {
+        console.error("❌ Le script Google Sign-In n'est pas encore chargé.");
+      }
+    };
+
+    // Attendre que la page charge pour exécuter le script
+    if (document.readyState === "complete") {
+      loadGoogleScript();
     } else {
-      console.error("Le script Google Sign-In n'est pas chargé.");
+      window.onload = loadGoogleScript;
     }
   }, [onLogin]);
 
