@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./navbar"; 
 import Login from "./Login";
 import Presentation from "./Presentation"; 
-import Calendrier from "./calendrier"; // Ajout du composant Calendrier
+import Calendrier from "./calendrier"; 
 import RecetteIA from "../src/recette_ia";
 import Media from "../src/media";
 
@@ -14,10 +14,10 @@ function App() {
     <Router>
       {user ? (
         <>
-          {/* Barre de navigation affichée si l'utilisateur est connecté */}
+          
           <Navbar user={user} />
           <Routes>
-            {/* Route pour la page d'accueil */}
+            
             <Route
               path="/"
               element={
@@ -29,17 +29,17 @@ function App() {
                 </div>
               }
             />
-            {/* Route pour la page Calendrier */}
+     
             <Route path="/calendrier" element={<Calendrier />} />
 
-            {/* Route pour la page Recette IA */}
+            
             <Route path="/recette_ia" element={<RecetteIA />} />
 
             <Route path="/media" element={<Media />} />
           </Routes>
         </>
       ) : (
-        // Page de connexion si l'utilisateur n'est pas connecté
+      
         <Login onLogin={setUser} />
       )}
     </Router>

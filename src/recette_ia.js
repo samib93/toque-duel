@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-// Définir les recettes statiques
 const recettes = [
   {
     titre: "Spaghetti Carbonara",
@@ -52,11 +51,11 @@ const RecetteIA = () => {
   const [recette, setRecette] = useState(null);
   const [error, setError] = useState("");
 
-  // Fonction pour afficher une recette aléatoire
+  
   const fetchRecette = () => {
-    const randomIndex = Math.floor(Math.random() * recettes.length); // Générer un index aléatoire
-    setRecette(recettes[randomIndex]); // Mettre à jour la recette affichée
-    setError(""); // Réinitialiser l'erreur
+    const randomIndex = Math.floor(Math.random() * recettes.length); 
+    setRecette(recettes[randomIndex]); 
+    setError("");
   };
 
   return (
