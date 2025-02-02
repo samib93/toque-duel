@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import {
   HomeIcon,
   CalendarIcon,
-  ChatBubbleOvalLeftEllipsisIcon,
   PlayIcon,
   Bars3Icon,
   XMarkIcon
@@ -17,28 +16,28 @@ function Navbar({ user }) {
     <nav className="bg-gray-800 text-white shadow-md">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         
-        {/* Logo aligné à gauche */}
-        <div className="flex items-center">
+        {/* Logo cliquable vers la page Presentation */}
+        <Link to="Presentation" className="flex items-center">
           <img src={logo} alt="Logo" className="h-12 w-12 rounded-2xl" />
           <span className="ml-2 text-xl font-bold">Toque en Duel</span>
-        </div>
+        </Link>
 
         {/* Menu pour desktop */}
         <ul className="hidden md:flex space-x-6 items-center ml-auto">
-          <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
-            <Link to="/recette_ia" className="flex items-center space-x-2">
+          <li>
+            <Link to="/recette_ia" className="flex items-center space-x-2 hover:text-blue-400">
               <HomeIcon className="h-6 w-6" />
               <span>Recette IA</span>
             </Link>
           </li>
-          <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
-            <Link to="/calendrier" className="flex items-center space-x-2">
+          <li>
+            <Link to="/calendrier" className="flex items-center space-x-2 hover:text-blue-400">
               <CalendarIcon className="h-6 w-6" />
               <span>Calendrier</span>
             </Link>
           </li>
-          <li className="flex items-center space-x-2 cursor-pointer hover:text-blue-400">
-            <Link to="/media" className="flex items-center space-x-2">
+          <li>
+            <Link to="/media" className="flex items-center space-x-2 hover:text-blue-400">
               <PlayIcon className="h-6 w-6" />
               <span>Media</span>
             </Link>
@@ -46,10 +45,7 @@ function Navbar({ user }) {
         </ul>
 
         {/* Bouton menu burger pour mobile */}
-        <button
-          className="md:hidden focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        <button className="md:hidden focus:outline-none" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
         </button>
       </div>
